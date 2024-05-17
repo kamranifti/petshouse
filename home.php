@@ -3,7 +3,7 @@ session_start();
 
 if(!isset($_SESSION["user_email"])){
 
-  header("location: index.php");
+  header("location: index.php");  
   
   }
 
@@ -16,7 +16,7 @@ if(!isset($_SESSION["user_email"])){
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>HOME</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -52,7 +52,6 @@ if(!isset($_SESSION["user_email"])){
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
