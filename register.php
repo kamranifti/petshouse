@@ -97,6 +97,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                   </div>
 
                   <form id="passwordForm" class="row g-3 needs-validation" novalidate method="POST" action="">
+                    
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
                       <input type="text" name="name" class="form-control" id="yourName" required>
@@ -108,6 +109,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email address!</div>
                     </div>
+                    
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <input type="text" name="username" class="form-control" id="yourUsername" required>
