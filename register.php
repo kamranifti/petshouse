@@ -9,6 +9,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
   $email = $_POST['email'];
   $username = $_POST['username'];
   $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
   // Check if the user already exists
   $isExist = $obj->checkUserExist("users", "user_email", "user_email = '{$email}'");
@@ -97,7 +98,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                   </div>
 
                   <form id="passwordForm" class="row g-3 needs-validation" novalidate method="POST" action="">
-                    
+
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
                       <input type="text" name="name" class="form-control" id="yourName" required>
@@ -109,7 +110,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email address!</div>
                     </div>
-                    
+
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <input type="text" name="username" class="form-control" id="yourUsername" required>
@@ -127,6 +128,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                       <input type="password" name="confirm_password" class="form-control" id="confirmPassword" required>
                       <div class="invalid-feedback">Please confirm your password!</div>
                     </div>
+
+
 
                     <div class="col-12 pt-2">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
@@ -149,7 +152,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
- 
+
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -165,13 +168,13 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
 
   <script>
     document.getElementById('passwordForm').addEventListener('submit', function(event) {
-        var password = document.getElementById('yourPassword').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
+      var password = document.getElementById('yourPassword').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
 
-        if (password !== confirmPassword) {
-            alert('Passwords do not match.');
-            event.preventDefault();  // Prevent form submission
-        }
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        event.preventDefault(); // Prevent form submission
+      }
     });
   </script>
 

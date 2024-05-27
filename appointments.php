@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        body{
+        body {
             background-color: #f5f5f5;
         }
     </style>
@@ -52,35 +52,35 @@
     <div class="container ms-auto">
         <div class="navbar">
             <div class="logo"><a href="home.php" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse</span>
-      </a></div>
-      <div class="heading mx-4">
-        <h1 class="headingss mt-2">APPOINTMENTS</h1>
-      </div>
+                    <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse</span>
+                </a></div>
+            <div class="heading mx-4">
+                <h1 class="headingss mt-2">APPOINTMENTS</h1>
+            </div>
             <div class="but">
                 <!-- Large Modal -->
-        <button type="button" class="btn btn-primary mt-3 mb-3 add-btn mx-1" data-bs-toggle="modal" data-bs-target="#largeModal">
-            Add Appointments
-        </button>
-        
+                <button type="button" class="btn btn-primary mt-3 mb-3 add-btn mx-1" data-bs-toggle="modal" data-bs-target="#largeModal">
+                    Add Appointments
+                </button>
 
-        <div class="modal fade" id="largeModal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Large Modal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                <div class="modal fade" id="largeModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Large Modal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div><!-- End Large Modal-->
+                </div><!-- End Large Modal-->
             </div>
         </div>
         <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">

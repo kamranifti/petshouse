@@ -6,31 +6,31 @@ session_start();
 $db = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-   
-    $result = $db->select("users", "user_email, password", null, "user_email = '{$email}'");
-    
-    if ($result) {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
 
-        $users = $db->getResult();
 
-        if (count($users) === 1) { 
+  $result = $db->select("users", "user_email, password", null, "user_email = '{$email}'");
 
-            $user = $users[0];
+  if ($result) {
 
-            
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['user_email'] = $user['user_email'];
-                header('Location: home.php');
-                exit();
-            }
-        }
+    $users = $db->getResult();
+
+    if (count($users) === 1) {
+
+      $user = $users[0];
+
+
+      if (password_verify($password, $user['password'])) {
+        $_SESSION['user_email'] = $user['user_email'];
+        header('Location: home.php');
+        exit();
+      }
     }
-    
-    echo "<div class='alert alert-primary try-again'>
+  }
+
+  echo "<div class='alert alert-primary try-again'>
             <strong>Invalid email or passowrd ! Try Again</strong>
             </div>
             ";
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -148,4 +148,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 
-</html> 
+</html>

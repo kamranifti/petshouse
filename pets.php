@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        body{
+        body {
             background-color: #f5f5f5;
         }
     </style>
@@ -52,86 +52,82 @@
     <div class="container ms-auto">
         <div class="navbar">
             <div class="logo"><a href="home.php" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse</span>
-      </a></div>
-      <div class="heading mx-4">
-        <h1 class="headingss mt-2">PETS</h1>
-      </div>
+                    <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse</span>
+                </a></div>
+            <div class="heading mx-4">
+                <h1 class="headingss mt-2">PETS</h1>
+            </div>
             <div class="but">
                 <!-- Large Modal -->
-        <button type="button" class="btn btn-primary mt-3 mb-3 add-btn px-3 mx-1" data-bs-toggle="modal" data-bs-target="#largeModal">
-            Add Pet
-        </button>
-        
+                <button type="button" class="btn btn-primary mt-3 mb-3 add-btn px-3 mx-1" data-bs-toggle="modal" data-bs-target="#largeModal">
+                    Add Pet
+                </button>
 
-        <div class="modal fade" id="largeModal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">You Can Add New Pet</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                    <form>
-                        <div class="row d-flex">
-                            <div class="col-lg-6">
-                                
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">PET Id</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">STATUS</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                    
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Date Of Birth</label>
-                            <input type="date" class="form-control" id="exampleInputPassword1">
-                        </div>
-                    
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">SPECIES</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
+
+                <div class="modal fade" id="largeModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">You Can Add New Pet</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="col-lg-6">
-                                
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">GENDER</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                    
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Color</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">WEIGHT</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">NOTES</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
+                            <div class="modal-body">
+
+                                <form>
+                                    <div class="row d-flex">
+                                        <div class="col-lg-6">
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">STATUS</label>
+                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Date Of Birth</label>
+                                                <input type="date" class="form-control" id="exampleInputPassword1">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">SPECIES</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">GENDER</label>
+                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Color</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">WEIGHT</label>
+                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">NOTES</label>
+                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mt-3 mb-3 add-btn">Submit</button>
+
+                                    </div>
+
+                                </form>
+
                             </div>
-                        
-                        <button type="submit" class="btn btn1">Submit</button>
-
                         </div>
-
-                   </form>
-                    
                     </div>
                 </div>
-            </div>
-        </div>
             </div>
         </div>
         <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
@@ -139,17 +135,22 @@
             <table id="myTable" class="display mx-auto" style="background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;">
                 <thead>
                     <tr>
-                        <th style="padding: 1px; text-align:center;">data 1</th>
-                        <th style="padding: 10px; text-align:center;">data 2</th>
-                        <th style="padding: 10px; text-align:center;">data 3</th>
-                        <th style="padding: 10px; text-align:center;">data 4</th>
-                        <th style="padding: 10px; text-align:center;">data 5</th>
-                        <th style="padding: 10px; text-align:center;">data 6</th>
+                        <th style="padding: 10px; text-align:center;">Name</th>
+                        <th style="padding: 10px; text-align:center;">Status</th>
+                        <th style="padding: 10px; text-align:center;">DOB</th>
+                        <th style="padding: 10px; text-align:center;">Species</th>
+                        <th style="padding: 10px; text-align:center;">Gender</th>
+                        <th style="padding: 10px; text-align:center;">Color</th>
+                        <th style="padding: 10px; text-align:center;">Weight</th>
+                        <th style="padding: 10px; text-align:center;">Notes</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>faisal 1 Data 1</td>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
@@ -157,12 +158,92 @@
                         <td>rayan 1 Data 2</td>
                     </tr>
                     <tr>
-                        <td>gulbaz 2 Data 1</td>
+
                         <td>murtaza 2 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                    </tr>
+                    <tr>
+
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
+                        <td>rayan 1 Data 2</td>
                     </tr>
                     <tr>
                         <td>faisal 1 Data 1</td>
@@ -171,11 +252,6 @@
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
@@ -185,11 +261,6 @@
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
@@ -203,11 +274,6 @@
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
@@ -219,11 +285,6 @@
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
@@ -233,27 +294,6 @@
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>
                         <td>rayan 1 Data 2</td>

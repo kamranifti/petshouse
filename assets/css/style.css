@@ -21,8 +21,8 @@ a:hover {
   text-decoration: none;
 }
 
-.try-again{
- text-align: center !important;
+.try-again {
+  text-align: center !important;
 }
 
 h1,
@@ -33,15 +33,18 @@ h5,
 h6 {
   font-family: "Nunito", sans-serif;
 }
-.headingss{
+
+.headingss {
   margin-right: 185px;
   color: #012970;
 }
-.add-btn{
+
+.add-btn {
   background-color: #3e4f6f;
   outline: #012970;
   border: solid 1px #3e4f6f;
 }
+
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
@@ -328,6 +331,7 @@ h6 {
 .breadcrumb .breadcrumb-item::before {
   color: #899bbd;
 }
+
 .yate {
   padding-left: 500px;
 }
