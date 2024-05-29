@@ -1,3 +1,58 @@
+<?php 
+
+require "database.php";
+
+$obj = new Database();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['status']) && isset($_POST['phone']) && isset($_POST['address_1']) && isset($_POST['city']) && isset($_POST['province']) && isset($_POST['country']) && isset($_POST['postal_code']) && isset($_POST['type']) && isset($_POST['next_visit'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $status = $_POST['status'];
+        $phone = $_POST['phone'];
+        $address_1 = $_POST['address_1'];
+        $city = $_POST['city'];
+        $province = $_POST['province'];
+        $country = $_POST['country'];
+        $postal_code = $_POST['postal_code'];
+        $type = $_POST['type'];
+        $next_visit = $_POST['next_visit'];
+
+        // Check if the user already exists
+        $isExist = $obj->checkUserExist("customers", "email", "email = '{$email}'");
+
+        if ($isExist) {
+            echo "<div class='alert alert-primary try-again'>
+            <strong>User Already Exists</strong>
+            </div>";
+        } else {
+            $value = [
+                "name" => $name,
+                "email" => $email,
+                "status" => $status,
+                "phone" => $phone,
+                "address_1" => $address_1,
+                "city" => $city,
+                "province" => $province,
+                "country" => $country,
+                "postal_code" => $postal_code,
+                "type" => $type,
+                "next_visit" => $next_visit
+            ];
+
+            // Insert the data
+            if ($obj->insert("customers", $value)) {
+                header("Location: customer.php");
+                exit;
+            } else {
+                echo "<h2>Data NOT inserted</h2>";
+            }
+        }
+    }
+} 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +60,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>CUSTOMERS </title>
+    <title>PETS</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -33,314 +88,152 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
-    </style>
-
 </head>
 
 <body>
-    <!-- <div class="container ms-auto"> -->
-    <div class="navbar">
-        <div class="logo px-3"><a href="home.php" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse</span>
-            </a></div>
-        <div class="heading mx-4">
-            <h1 class="headingss mt-2">CUSTOMERS</h1>
-        </div>
-        <div class="but">
-            <!-- Large Modal -->
-            <button type="button" class="btn btn-primary mt-3 mb-3 add-btn px-3 mx-3" data-bs-toggle="modal" data-bs-target="#largeModal">
-                Add customers
-            </button>
+    <div class="container ms-auto">
+        <div class="navbar">
+            <div class="logo"><a href="home.php" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block"><i class="fa-solid fa-dog"></i> PetHouse </span>
+      </a></div>
+      <div class="heading mx-4">
+        <h1 class="headingss mt-2">CUSTOMERS</h1>
+      </div>
+            <div class="but">
+                <!-- Large Modal -->
+        <button type="button" class="btn btn1 mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#largeModal">
+            Add Customer
+        </button>
+        
 
+        <div class="modal fade" id="largeModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">You Can Add New Customer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    <form method="POST" action="">
+                        <div class="row d-flex">
+                            <div class="col-lg-6">
 
-            <div class="modal fade" id="largeModal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">You Can Add New Customer</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            
+                        
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">NAME</label>
+                            <input type="text" name="name" class="form-control" id="exampleInputPassword1">
                         </div>
-                        <div class="modal-body">
 
-                            <form>
-                                <div class="row d-flex">
-                                    <div class="col-lg-6">
+                        
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">EMAIL</label>
+                            <input type="text" name="email" class="form-control" id="exampleInputPassword1">
+                        </div>
+                    
 
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Customer Id</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">STATUS</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">STATUS</label>
+                            <input type="text" name="status" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">PHONE</label>
+                            <input type="text" name="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">ADDRESS 1</label>
+                            <input type="text" name="address_1" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">CITY</label>
+                            <input type="text" name="city" class="form-control" id="exampleInputPassword1">
+                        </div>
+                            </div>
+                            <div class="col-lg-6">
+                             
+                        
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">PROVINCE</label>
+                            <input type="text" name="province" class="form-control" id="exampleInputPassword1">
+                        </div>
 
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">TITLE</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">COUNTRY</label>
+                            <input type="text" name="country" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">POSTAL CODE</label>
+                            <input type="text" name="postal_code" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">TITLE</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
 
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">FIRST NAME</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">EMAIL</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">PHONE</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">ADDRESS 1</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">LAST NAME</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">CITY</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">PROVINCE</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">COUNTRY</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">POSTAL CODE</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">TYPE</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">NEXT VISIT</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1">
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn1">Submit</button>
-
-                                </div>
-
-                            </form>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">TYPE</label>
+                            <input type="text" name="type" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">NEXT VISIT</label>
+                            <input type="text" name="next_visit" class="form-control" id="exampleInputPassword1">
+                        </div>
+                            </div>
+                        
+                        <button type="submit" class="btn btn1">Submit</button>
 
                         </div>
+
+                   </form>
+                    
                     </div>
                 </div>
-                        
+            </div>
+        </div><!-- End Large Modal-->
             </div>
         </div>
-    </div>
-    <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
+        <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
 
-        <table id="myTable" class="display mx-auto" style="background-color: #f5f5f5; border-radius: 9px; text-align:center; color :black;">
-
-            <thead>
+            <table id="myTable" class="display mx-auto" style="background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;">
+                <thead>
                 <tr>
-                    <th>Id</th>
-                    <th> Customer Id</th>
-                    <th> Status</th>
-                    <th> Type</th>
-                    <th> Start Datetime</th>
-                    <th> End Datetime</th>
-                    <th>Notes</th>
-                    <th>Dog Walkers</th>
-                    <th>Cost Estimate</th>
-                    <th>Status 2</th>
-                    <th>Time Spent</th>
-                    <th>Invoice Spent</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Active</td>
-                    <td>Dog</td>
-                    <td>25-1-2017</td>
-                    <td>Animal</td>
-                    <td>Male</td>
-                    <td>Black</td>
-                    <td>49kg</td>
-                    <td>Good</td>
-                    <td>Active</td>
-                    <td>Many</td>
-                    <td>March</td>
-
-                </tr>
-            </tbody>
-        </table>
-        <script>
-            let table = new DataTable('#myTable');
-        </script>
-    </section>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Country</th>
+                <th>Postal Code</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Next Visit</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Active</td>
+                        <td>Dog</td>
+                        <td>25-1-2017</td>
+                        <td>Animal</td>
+                        <td>Male</td>
+                        <td>Male</td>
+                        <td>Male</td>
+                        <td>Male</td>
+                        <td>Male</td>
+                        <td>Male</td>
+                    </tr>
+                </tbody>
+            </table>
+            <script>
+                let table = new DataTable('#myTable');
+            </script>
+        </section>
     </div>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -1,3 +1,50 @@
+<?php
+
+require_once "database.php";
+
+$obj = new Database();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['name']) && isset($_POST['status']) && isset($_POST['dob']) && isset($_POST['species']) && isset($_POST['gender']) && isset($_POST['color']) && isset($_POST['weight']) && isset($_POST['notes'])) {
+        $name = $_POST['name'];
+        $status = $_POST['status'];
+        $dob = $_POST['dob'];
+        $species = $_POST['species'];
+        $gender = $_POST['gender'];
+        $color = $_POST['color'];
+        $weight = $_POST['weight'];
+        $notes = $_POST['notes'];
+
+        // Check if the user already exists
+        $isExist = $obj->checkUserExist("pets", "name", "name = '{$name}'");
+
+        if ($isExist) {
+            echo "<div class='alert alert-primary try-again'>
+            <strong>User Already Exists</strong>
+            </div>";
+        } else {
+            $value = [
+                "name" => $name,
+                "status" => $status,
+                "dob" => $dob,
+                "species" => $species,
+                "gender" => $gender,
+                "color" => $color,
+                "weight" => $weight,
+                "notes" => $notes
+            ];
+
+            // Insert the data
+            if ($obj->insert("pets", $value)) {
+                header("Location: pets.php");
+                exit;
+            } else {
+                echo "<h2>Data NOT inserted</h2>";
+            }
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,19 +80,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
-    </style>
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -59,10 +93,9 @@
             </div>
             <div class="but">
                 <!-- Large Modal -->
-                <button type="button" class="btn btn-primary mt-3 mb-3 add-btn px-3 mx-1" data-bs-toggle="modal" data-bs-target="#largeModal">
-                    Add Pet
+                <button type="button" class="btn btn1 mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#largeModal">
+                    ADD PET
                 </button>
-
 
                 <div class="modal fade" id="largeModal" tabindex="-1">
                     <div class="modal-dialog modal-lg">
@@ -72,238 +105,102 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-
-                                <form>
+                                <form method="post" action="">
                                     <div class="row d-flex">
                                         <div class="col-lg-6">
-
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Name</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" name="name" class="form-control" id="name" required>
                                             </div>
-
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">STATUS</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                                <label for="status" class="form-label">STATUS</label>
+                                                <input type="text" name="status" class="form-control" id="status" required>
                                             </div>
-
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">Date Of Birth</label>
-                                                <input type="date" class="form-control" id="exampleInputPassword1">
+                                                <label for="dob" class="form-label">Date Of Birth</label>
+                                                <input type="date" name="dob" class="form-control" id="dob" required>
                                             </div>
-
                                             <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">SPECIES</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                <label for="species" class="form-label">SPECIES</label>
+                                                <input type="text" name="species" class="form-control" id="species" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">GENDER</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Color</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                <label for="gender" class="form-label">GENDER</label>
+                                                <input type="text" name="gender" class="form-control" id="gender" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">WEIGHT</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                                <label for="color" class="form-label">Color</label>
+                                                <input type="text" name="color" class="form-control" id="color" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">NOTES</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                                <label for="weight" class="form-label">WEIGHT</label>
+                                                <input type="text" name="weight" class="form-control" id="weight" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="notes" class="form-label">NOTES</label>
+                                                <input type="text" name="notes" class="form-control" id="notes" required>
                                             </div>
                                         </div>
-
-                                        <button type="submit" class="btn btn-primary mt-3 mb-3 add-btn">Submit</button>
-
+                                        <button type="submit" class="btn btn1">Submit</button>
                                     </div>
-
                                 </form>
-
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- End Large Modal -->
             </div>
         </div>
-        <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
+        <section class="section dashboard" style="background-color: #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
+            <?php
 
-            <table id="myTable" class="display mx-auto" style="background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;">
-                <thead>
+            require_once "database.php";
+
+            $objj = new Database();
+
+            $objj->select("pets", "*", null, null, null);
+            $data = $objj->getResult();
+
+            echo "<table id='myTable' class='display mx-auto' style='background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;'>";
+            echo "
+            <thead>
                     <tr>
-                        <th style="padding: 10px; text-align:center;">Name</th>
-                        <th style="padding: 10px; text-align:center;">Status</th>
-                        <th style="padding: 10px; text-align:center;">DOB</th>
-                        <th style="padding: 10px; text-align:center;">Species</th>
-                        <th style="padding: 10px; text-align:center;">Gender</th>
-                        <th style="padding: 10px; text-align:center;">Color</th>
-                        <th style="padding: 10px; text-align:center;">Weight</th>
-                        <th style="padding: 10px; text-align:center;">Notes</th>
-                    </tr>
+                  <th style='padding: 10px; text-align:center;'>Name</th>
+                  <th style='padding: 10px; text-align:center;'>Status</th>
+                  <th style='padding: 10px; text-align:center;'>DOB</th>
+                  <th style='padding: 10px; text-align:center;'>Species</th>
+                  <th style='padding: 10px; text-align:center;'>Gender</th>
+                  <th style='padding: 10px; text-align:center;'>Color</th>
+                  <th style='padding: 10px; text-align:center;'>Weight</th>
+                  <th style='padding: 10px; text-align:center;'>Notes</th>
+                </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                ";
 
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
+            if (!empty($data)) {
+                foreach ($data as $pet) {
+                    echo "<tr>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['name']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['status']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['dob']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['species']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['gender']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['color']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['weight']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$pet['notes']}</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8' style='padding: 10px; text-align:center;'>No data available</td></tr>";
+            }
 
-                        <td>murtaza 2 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>faisal 1 Data 1</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                        <td>rayan 1 Data 2</td>
-                    </tr>
-                </tbody>
-            </table>
+            echo "</table>";
+            ?>
             <script>
-                let table = new DataTable('#myTable');
+                $(document).ready(function() {
+                    let table = new DataTable('#myTable');
+                });
             </script>
         </section>
     </div>

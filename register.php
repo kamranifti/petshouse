@@ -9,7 +9,6 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
   $email = $_POST['email'];
   $username = $_POST['username'];
   $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-  $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
   // Check if the user already exists
   $isExist = $obj->checkUserExist("users", "user_email", "user_email = '{$email}'");
