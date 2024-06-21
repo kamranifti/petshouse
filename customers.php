@@ -5,12 +5,12 @@ require "database.php";
 $obj = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['status']) && isset($_POST['phone']) && isset($_POST['address_1']) && isset($_POST['city']) && isset($_POST['province']) && isset($_POST['country']) && isset($_POST['postal_code']) && isset($_POST['type']) && isset($_POST['next_visit'])) {
+    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['status']) && isset($_POST['phone']) && isset($_POST['address']) && isset($_POST['city']) && isset($_POST['province']) && isset($_POST['country']) && isset($_POST['postal_code']) && isset($_POST['type']) && isset($_POST['next_visit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $status = $_POST['status'];
         $phone = $_POST['phone'];
-        $address_1 = $_POST['address_1'];
+        $address = $_POST['address'];
         $city = $_POST['city'];
         $province = $_POST['province'];
         $country = $_POST['country'];
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($isExist) {
             echo "<div class='alert alert-primary try-again'>
-            <strong>User Already Exists</strong>
+            <strong>customer Already Exists</strong>
             </div>";
         } else {
             $value = [
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "email" => $email,
                 "status" => $status,
                 "phone" => $phone,
-                "address_1" => $address_1,
+                "address" => $address,
                 "city" => $city,
                 "province" => $province,
                 "country" => $country,
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Insert the data
             if ($obj->insert("customers", $value)) {
-                header("Location: customer.php");
+                header("Location: customers.php");
                 exit;
             } else {
                 echo "<h2>Data NOT inserted</h2>";
@@ -144,8 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">ADDRESS 1</label>
-                            <input type="text" name="address_1" class="form-control" id="exampleInputPassword1">
+                            <label for="exampleInputPassword1" class="form-label"> ADDRESS </label>
+                            <input type="text" name="address" class="form-control" id="exampleInputPassword1">
                         </div>
                         
                         <div class="mb-3">
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">NEXT VISIT</label>
-                            <input type="text" name="next_visit" class="form-control" id="exampleInputPassword1">
+                            <input type="date" name="next_visit" class="form-control" id="exampleInputPassword1">
                         </div>
                             </div>
                         
@@ -196,42 +196,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div><!-- End Large Modal-->
             </div>
         </div>
-        <section class="section dashboard" style="background-color:  #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
+        <section class="section dashboard" style="background-color: #3e4f6f; padding: 10px; border-radius: 4px; text-align:center; color:white;">
+            <?php
 
-            <table id="myTable" class="display mx-auto" style="background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;">
-                <thead>
-                <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Province</th>
-                <th>Country</th>
-                <th>Postal Code</th>
-                <th>Status</th>
-                <th>Type</th>
-                <th>Next Visit</th>
-            </tr>
-                </thead>
-                <tbody>
+            require_once "database.php";
+
+            $objj = new Database();
+
+            $objj->select("customers", "*", null, null, null);
+            $data = $objj->getResult();
+
+            echo "<table id='myTable' class='display mx-auto' style='background-color: #f5f5f5; padding: 10px; border-radius: 9px; text-align:center; color :black;'>";
+            echo "
+            <thead>
                     <tr>
-                        <td>1</td>
-                        <td>Active</td>
-                        <td>Dog</td>
-                        <td>25-1-2017</td>
-                        <td>Animal</td>
-                        <td>Male</td>
-                        <td>Male</td>
-                        <td>Male</td>
-                        <td>Male</td>
-                        <td>Male</td>
-                        <td>Male</td>
-                    </tr>
-                </tbody>
-            </table>
+                  <th style='padding: 10px; text-align:center;'>Name</th>
+                  <th style='padding: 10px; text-align:center;'>Email</th>
+                  <th style='padding: 10px; text-align:center;'>Status</th>
+                  <th style='padding: 10px; text-align:center;'>Phone</th>
+                  <th style='padding: 10px; text-align:center;'>Address</th>
+                  <th style='padding: 10px; text-align:center;'>City</th>
+                  <th style='padding: 10px; text-align:center;'>Province</th>
+                  <th style='padding: 10px; text-align:center;'>Country</th>
+                  <th style='padding: 10px; text-align:center;'>Postal_code</th>
+                  <th style='padding: 10px; text-align:center;'>Type</th>
+                  <th style='padding: 10px; text-align:center;'>Next Visit</th>
+                </tr>
+                </thead>
+                ";
+
+            if (!empty($data)) {
+                foreach ($data as $customer) {
+                    echo "<tr>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['name']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['email']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['status']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['phone']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['address']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['city']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['province']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['country']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['postal_code']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['type']}</td>";
+                    echo "<td style='padding: 10px; text-align:center;'>{$customer['next_visit']}</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8' style='padding: 10px; text-align:center;'>No data available</td></tr>";
+            }
+
+            echo "</table>";
+            ?>
             <script>
-                let table = new DataTable('#myTable');
+                $(document).ready(function() {
+                    let table = new DataTable('#myTable');
+                });
             </script>
         </section>
     </div>
